@@ -15,7 +15,7 @@ app.secret_key = "advanced-idor-demo-not-for-prod"
 # --- Fake DB ---
 USERS = {
     "ahmed": {"id": 1, "password": "oppenheimer", "name": "Alice Liddell"},
-    "alone":   {"id": 2, "password": "lonely",    "name": "Alone Musk."},
+    "alone":   {"id": 2, "password": "heartBr0ke-lonely",    "name": "Alone Musk."},
 }
 
 INVOICES = [
