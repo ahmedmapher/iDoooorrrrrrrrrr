@@ -1,46 +1,56 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Neighborly Invoices — Dashboard</title>
-    <link rel="stylesheet" href="/static/style.css">
-  </head>
-  <body>
-    <div class="container">
-      <header class="topbar">
-        <div>
-          <h1>Neighborly Invoices</h1>
-          <p class="subtitle">Welcome, {{ user.name }} ({{ user.username }})</p>
-        </div>
-        <a href="/logout" class="logout">Logout</a>
-      </header>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Neighborly Invoices Pro — Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <div>
+        <h1>Neighborly Invoices Pro</h1>
+        <p class="subtitle">Welcome, {{ user.name }} ({{ user.username }})</p>
+      </div>
+      <a href="/logout" class="logout">Logout</a>
+    </header>
 
-      <section>
-        <h2>Your invoices</h2>
-        {% if invoices %}
-          <ul class="list">
-            {% for inv in invoices %}
-              <li>
-                <div class="row">
-                  <div>
-                    <strong>#{{ inv.id }}</strong> — {{ inv.description }}
-                  </div>
-                  <div class="actions">
-                    <a class="btn" href="/invoice?id={{ inv.id }}">View</a>
-                  </div>
-                </div>
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p>No invoices yet.</p>
-        {% endif %}
-      </section>
+    <section class="note">
+      <p>{{ announcement }}</p>
+    </section>
 
-      <section class="note">
-        <p><em>Note:</em> Every invoice has a numeric ID. Neat!</p>
-      </section>
+    <section>
+      <h2>Your invoices</h2>
+      {% if invoices %}
+      <ul class="list">
+        {% for inv in invoices %}
+        <li>
+          <div class="row">
+            <div>
+              <strong>UUID:</strong> <code>{{ inv.uuid }}</code><br>
+              <span class="muted">Modern, secure links use the UUID route.</span>
+            </div>
+            <div class="actions">
+              <a class="btn" href="/invoice/{{ inv.uuid }}">Open</a>
+              <!-- The "Export" button uses a legacy ref -->
+              {% set ref = (inv.order_no | string) | b64encode %}
+              <a class="btn" href="/export/invoice?ref={{ ref }}">Export CSV</a>
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>No invoices yet.</p>
+      {% endif %}
+    </section>
+        <div class="note">
+      <p>Tip: Older invoices had 6-digit numbers. Some large enterprise customers started around <code>200000</code>.</p>
     </div>
-  </body>
+    <section class="note">
+      <p><a href="/support">Contact support</a> if you need to reference a legacy order number.</p>
+    </section>
+  </div>
+</body>
 </html>
