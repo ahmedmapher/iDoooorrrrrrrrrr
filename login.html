@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Neighborly Invoices — Login</title>
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Neighborly Invoices</h1>
+      <p class="subtitle">Please sign in</p>
+      {% if error %}<p class="error">{{ error }}</p>{% endif %}
+      <form method="post">
+        <label>Username</label>
+        <input type="text" name="username" placeholder="alice" required>
+        <label>Password</label>
+        <input type="password" name="password" placeholder="wonderland" required>
+        <button type="submit">Log in</button>
+      </form>
+      <div class="hint">
+        <p><strong>CTF hint:</strong> Try <code>alice / wonderland</code>.</p>
+      </div>
+    </div>
+  </body>
+</html>

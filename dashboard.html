@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Neighborly Invoices — Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+  <body>
+    <div class="container">
+      <header class="topbar">
+        <div>
+          <h1>Neighborly Invoices</h1>
+          <p class="subtitle">Welcome, {{ user.name }} ({{ user.username }})</p>
+        </div>
+        <a href="/logout" class="logout">Logout</a>
+      </header>
+
+      <section>
+        <h2>Your invoices</h2>
+        {% if invoices %}
+          <ul class="list">
+            {% for inv in invoices %}
+              <li>
+                <div class="row">
+                  <div>
+                    <strong>#{{ inv.id }}</strong> — {{ inv.description }}
+                  </div>
+                  <div class="actions">
+                    <a class="btn" href="/invoice?id={{ inv.id }}">View</a>
+                  </div>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>No invoices yet.</p>
+        {% endif %}
+      </section>
+
+      <section class="note">
+        <p><em>Note:</em> Every invoice has a numeric ID. Neat!</p>
+      </section>
+    </div>
+  </body>
+</html>

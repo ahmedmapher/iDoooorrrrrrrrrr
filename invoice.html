@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Neighborly Invoices — Invoice {{ invoice.id }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+  <body>
+    <div class="container">
+      <header class="topbar">
+        <div>
+          <h1>Invoice #{{ invoice.id }}</h1>
+          <p class="subtitle">for {{ user.name }}</p>
+        </div>
+        <a href="/dashboard" class="logout">Back</a>
+      </header>
+
+      <section>
+        <p><strong>Description:</strong> {{ invoice.description }}</p>
+        <p><strong>Amount:</strong> ${{ "%.2f"|format(invoice.amount) }}</p>
+        <h3>Line items</h3>
+        <ul class="list">
+          {% for li in invoice.line_items %}
+          <li>{{ li }}</li>
+          {% endfor %}
+        </ul>
+
+        {% if invoice.notes %}
+        <div class="note">
+          <p><strong>Notes:</strong> {{ invoice.notes }}</p>
+        </div>
+        {% endif %}
+      </section>
+
+      <section class="note">
+        <p>Pro tip: URLs and query parameters can be pretty revealing…</p>
+      </section>
+    </div>
+  </body>
+</html>
