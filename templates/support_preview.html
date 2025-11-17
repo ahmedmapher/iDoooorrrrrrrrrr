@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Support Preview</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <div>
+        <h1>Preview</h1>
+        <p class="subtitle">This preview is for support purposes only.</p>
+      </div>
+      <a href="/support" class="logout">Back</a>
+    </header>
+    <section>
+      <p><strong>Order #</strong> {{ invoice.order_no }}</p>
+      <p><strong>UUID:</strong> <code>{{ invoice.uuid }}</code></p>
+      <p><strong>Description:</strong> {{ invoice.description }}</p>
+      <p><strong>Amount:</strong> ${{ "%.2f"|format(invoice.amount) }}</p>
+      {% if invoice.notes %}
+      <div class="note"><p><strong>Notes:</strong> {{ invoice.notes }}</p></div>
+      {% endif %}
+      <p class="muted">If this is not your order, please go back.</p>
+    </section>
+  </div>
+</body>
+</html>
